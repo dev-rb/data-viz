@@ -1,0 +1,21 @@
+.mainContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.visualization{
+    width: 80%;
+    height: 80%;
+    background: #2A2A2A;
+}
+
+@media (max-width: 800px) {
+    .mainContainer{
+        justify-content: start;
+        margin-top: 1rem;
+    }
+}
