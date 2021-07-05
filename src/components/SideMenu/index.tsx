@@ -1,8 +1,14 @@
 import * as React from 'react';
 import { MdAdd, MdFileUpload, MdMenu } from 'react-icons/md';
+import * as d3 from 'd3';
 import styles from './sidemenu.module.css';
+import { autoType, max } from 'd3';
 
-const SideMenu = () => {
+interface Props {
+    updateData: (data: d3.DSVParsedArray<object>) => void
+}
+
+const SideMenu = ({ updateData }: Props) => {
 
     const [mobileMenuActive, setMobileMenuActive] = React.useState(false);
 
@@ -15,6 +21,18 @@ const SideMenu = () => {
             }
         });
     }, [mobileMenuActive])
+
+    const uploadFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        let files = e.target.files;
+        let file = files![0];
+        let reader = new FileReader();
+        reader.onload = function (event) {
+            let data = d3.csvParse(reader.result!.toString(), autoType);
+            console.log(max(data, ((val) => val[data.columns[2]])));
+            updateData(data);
+        }
+        reader.readAsText(file);
+    }
 
     return (
         <>
@@ -41,7 +59,8 @@ const SideMenu = () => {
                     </div>
 
                     <div className={styles.optionsContainer}>
-                        <button className={styles.uploadButton}> Upload <MdFileUpload size={30} style={{ marginLeft: '0.5rem' }} /></button>
+                        <label className={styles.uploadButton} htmlFor="csv-upload">Upload <MdFileUpload size={30} style={{ marginLeft: '0.5rem' }} /></label>
+                        <input id="csv-upload" type="file" accept=".csv" onChange={(e) => uploadFile(e)} style={{ display: 'none' }} />
                     </div>
                 </div>
             </div>

@@ -4,6 +4,43 @@
     background: #171717;
     border-left: 2px solid #FB8013;
     box-shadow: -2px 3px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.headingContainer{
+  position: relative;
+  width: 100%;
+  height: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headingContainer::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10;
+  width: 12rem;
+  height: 2px;
+  background: #2B2B2B;
+  margin-bottom: 1rem;
+}
+
+.heading{
+  color: white;
+  font-weight: 600;
+  font-size: 2.5rem;
+}
+
+.optionsContainer{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 800px) {
